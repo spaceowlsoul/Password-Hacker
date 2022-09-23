@@ -1,6 +1,5 @@
 import sys
 import socket
-import string
 import itertools
 
 
@@ -11,12 +10,13 @@ def establish_connection():
 
 
 def generate_password():
-    letters = string.ascii_lowercase
-    digits = string.digits
-    symbols = letters + digits
-    for count in range(1, len(symbols) + 1):
-        for p in itertools.product(symbols, repeat=count):
-            yield ''.join(map(lambda x: str(x), p))
+    with open('passwords.txt', 'r') as file:
+        for line in file:
+            if not line.isdigit():
+                for p in itertools.product(*([letter.lower(), letter.upper()] for letter in line.rstrip('\n'))):
+                    yield ''.join(p)
+            else:
+                yield line
 
 
 def guessing():
