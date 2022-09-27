@@ -52,7 +52,6 @@ def main():
         guessing_login(client_socket, data, buff_size)
         guessing_password(client_socket, data, buff_size)
         print(json.dumps(data))
-        client_socket.close()
 
 
 if __name__ == "__main__":
